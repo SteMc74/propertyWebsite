@@ -10,8 +10,8 @@ defined('MY_APP') or die('Restricted access');
  * Declare a number of constants that you can change depending on your application
  */
 define("DB_HOST","localhost");
-define("DB_USER","root");
-define("DB_PASSWORD","root");
+define("DB_USER","");
+define("DB_PASSWORD","");
 define("DB_DATABASE","dsa_property");
 
 /*
