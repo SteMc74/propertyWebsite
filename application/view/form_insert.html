@@ -1,0 +1,164 @@
+
+<?php if (isset($flashMessage) && strlen(trim($flashMessage)) > 0 ) : ?>
+<div class="alert">
+	<button type="button" class="close" data-dismiss="alert">�</button>
+	<strong>Message</strong>
+	<?php echo $flashMessage ?>
+</div>
+
+<?php endif;  ?>
+
+<form class="form-horizontal" method="post" action="insert.php" enctype="multipart/form-data" >
+
+<!--<form class="form-horizontal" method="post" action="testSubmit.php" enctype="multipart/form-data" >-->
+	<input type="hidden" name="property_id"
+		value="<?php echo $property['property_id']; ?>" />
+        
+	<div class="control-group">
+            <label class="control-label" for="inputTitle">Address</label>
+		<div class="controls">
+			<input type="text" id="inputAddressLine1" name="addressLine1" class="required"
+				placeholder="Address Line 1" value="<?php echo $property['addressLine1']; ?>">
+		</div>
+	</div>
+        
+        <div class="control-group">
+            <label class="control-label" for="inputTitle"></label>
+		<div class="controls">
+			<input type="text" id="inputAddressLine2" name="addressLine2" class="required"
+				placeholder="Address Line 2" value="<?php echo $property['addressLine2']; ?>">
+		</div>
+	</div>
+        
+        <div class="control-group">
+            <label class="control-label" for="inputTitle"></label>
+		<div class="controls">
+			<input type="text" id="inputAddressLine3" name="addressLine3" class="required"
+				placeholder="Address Line 3" value="<?php echo $property['addressLine3']; ?>">
+		</div>
+	</div>
+
+
+	<div class="control-group">
+		<label class="control-label" for="inputCounty">County</label>
+		<div class="controls">
+			<?php 
+				$records = counties_get_all();
+	
+				$arrayItems=array();
+
+				$count = sizeof($records);
+				for($i=0; $i < $count; $i++) {
+
+				$arrayItems[$i]["label"]=$records[$i]['county'];
+				$arrayItems[$i]["id"]=$records[$i]['county_id'];
+	
+
+				}
+
+
+echo uihelperSelect('county_id',$arrayItems,$property['county_id']) ?>
+		</div>
+	</div>
+
+        <div class="control-group">
+		<label class="control-label" for="inputPropertyType">Property Type</label>
+		<div class="controls">
+			<?php 
+				$records = property_type_get_all();
+	
+				$arrayItems=array();
+
+				$count = sizeof($records);
+				for($i=0; $i < $count; $i++) {
+
+				$arrayItems[$i]["label"]=$records[$i]['propertyType'];
+				$arrayItems[$i]["id"]=$records[$i]['type_id'];
+	
+
+				}
+
+
+echo uihelperSelect('type_id',$arrayItems,$property['type_id']) ?>
+		</div>
+	</div>
+        
+        
+        <div class="control-group">
+            <label class="control-label" for="inputPrice">Price</label>
+		<div class="controls">
+			<input type="text" id="inputPrice" name="price" class="required"
+				placeholder="Price" value="<?php echo $property['price']; ?>">
+		</div>
+	</div>
+        
+        
+        <div class="control-group">
+		<label class="control-label" for="inputRange">Price Range</label>
+		<div class="controls">
+			<?php 
+				$records = range_get_all();
+	
+				$arrayItems=array();
+
+				$count = sizeof($records);
+				for($i=0; $i < $count; $i++) {
+
+				$arrayItems[$i]["label"]=$records[$i]['priceRange'];
+				$arrayItems[$i]["id"]=$records[$i]['range_id'];
+	
+
+				}
+
+
+echo uihelperSelect('range_id',$arrayItems,$property['range_id']) ?>
+		</div>
+	</div>
+
+
+<div class="control-group">
+		<label class="control-label" for="inputStatus">Sale Status</label>
+		<div class="controls">
+			<?php 
+				$records = status_get_all();
+	
+				$arrayItems=array();
+
+				$count = sizeof($records);
+				for($i=0; $i < $count; $i++) {
+
+				$arrayItems[$i]["label"]=$records[$i]['saleStatus'];
+				$arrayItems[$i]["id"]=$records[$i]['sale_id'];
+	
+
+				}
+
+
+echo uihelperSelect('sale_id',$arrayItems,$property['sale_id']) ?>
+		</div>
+	</div>
+
+
+
+<!--  note, you cannot style file upload button, but folllowinglink is useful -->
+<!--  http://www.quirksmode.org/dom/inputfile.html -->
+
+	<div class="control-group">
+	<label class="control-label" for="inputImage">Upload Image</label>
+		<div class="controls">
+
+			<input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
+<input name="uploadedfile" type="file" />
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="controls">
+
+			<button type="submit" class="btn">
+				<?php echo $buttonLabel ?>
+			</button>
+		</div>
+	</div>
+</form>
+
+
