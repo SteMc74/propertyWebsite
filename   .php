@@ -70,11 +70,8 @@ if (!empty($_POST)) {
 		$flashMessage = "Record has been saved";
                 } else {
                     
-                    updateProperty($property);
-
-                    //get the id of the entry we're updating
-                    $property_id= $_POST["property_id"];
-                    
+                   $property_id = updateProperty($property);
+                     $property_id = $_POST["property_id"];
                     uploadFiles($property_id);
 		
                         header("Location: admin.php");
